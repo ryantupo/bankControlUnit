@@ -1,22 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
  *
  * @author ryansPC
  */
 public class InsertionSortLinkedList {
+
+    public static void main(String[] args) {
+        //use for debugging
+
+    }
+
+    //counter
     public int counter2 = 0;
 
-    public static CustomListLinky crunchifyList;
-    // Java program to sort link list 
-// using insertion sort 
+    //nodes
     node head;
     node sorted;
 
+    //node class
     class node {
 
         double val;
@@ -27,6 +28,7 @@ public class InsertionSortLinkedList {
         }
     }
 
+    //function to add a new node to end of the list
     void push(double val) {
         /* allocate node */
         node newnode = new node(val);
@@ -34,6 +36,8 @@ public class InsertionSortLinkedList {
         newnode.next = head;
         /* move the head to point to the new node */
         head = newnode;
+
+        //increment size counter
         counter2++;
     }
 
@@ -54,7 +58,7 @@ public class InsertionSortLinkedList {
         }
         // Update head_ref to point to sorted linked list 
         head = sorted;
-        
+
     }
 
     /* 
@@ -80,36 +84,17 @@ public class InsertionSortLinkedList {
         counter2++;
     }
 
-    /* Function to print linked list */
-    void printlist(node head) {
+    /* Function to return formatted custom linked list */
+    String printlist(node head) {
+        String text = "";
         while (head != null) {
-            System.out.print("£" + head.val + "\n");
+            text += ("£" + head.val + "\n");
             head = head.next;
         }
+        return text;
     }
 
-    // Driver program to test above functions 
-    public static void main(String[] args) {
-        InsertionSortLinkedList list = new InsertionSortLinkedList();
-
-        list.push(5);
-        list.push(20);
-        list.push(4);
-        list.push(3);
-        list.push(30);
-//        System.out.println("Linked List before Sorting..");
-//        list.printlist(list.head);
-//        list.insertionSort(list.head);
-//        System.out.println("\nLinkedList After sorting");
-//        list.printlist(list.head);
-
-
-
-
-
-    }
-
-    //for double[] lists 
+    //for Collections version (if wanted to use instead of .sort())
 //    public static InsertionSortLinkedList createSortedList(double[] unSortedList){
 //        InsertionSortLinkedList newList = new InsertionSortLinkedList();
 //        for (int i=0;i<unSortedList.length;i++){
@@ -120,7 +105,4 @@ public class InsertionSortLinkedList {
 //        return newList;
 //    }
 //    
-    //for custom linkedlist
-
-
 }

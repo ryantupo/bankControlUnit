@@ -98,8 +98,12 @@ public class addAccount extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(153, 153, 153)
+                .addGap(146, 146, 146)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextFieldAccountName, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TextFieldAccountNumber1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -108,17 +112,13 @@ public class addAccount extends javax.swing.JFrame {
                         .addGap(40, 40, 40)
                         .addComponent(jButton2)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(66, 66, 66)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(TextFieldAccountNumber1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jTextFieldAccountName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -126,7 +126,7 @@ public class addAccount extends javax.swing.JFrame {
                 .addComponent(jTextFieldAccountAdress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton2)
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         pack();
@@ -137,20 +137,29 @@ public class addAccount extends javax.swing.JFrame {
         //error detection for entering account number
         //to make sure a LONG isnt enetred the length of an account number
         //was limited to 8 chars to resolve this possible error
-        if (TextFieldAccountNumber1.getText().length() > 8) {
-            JOptionPane.showMessageDialog(null, "Account Number is Too large Any account number must be 8 Digits ", "INVALID ACCOUNT NUMBER", JOptionPane.WARNING_MESSAGE);
-        } else if (TextFieldAccountNumber1.getText().length() < 8) {
-            JOptionPane.showMessageDialog(null, "Account Number is Too SMALL Any account number must be 8 Digits ", "INVALID ACCOUNT NUMBER", JOptionPane.WARNING_MESSAGE);
-        } else {
-            AccountMain newAccount = new AccountMain(Integer.parseInt(TextFieldAccountNumber1.getText()), jTextFieldAccountName.getText(), jTextFieldAccountAdress.getText());
-            AccountListApp.Accounts.add(newAccount);
 
-            resetAllTextFields();
-            String infoMessage = AccountListApp.Accounts.get(AccountListApp.Accounts.size() - 1).printAllAccounts2();
-            String titleBar = "Account Sucessfully Added";
+        for (int i = 0; i < AccountListApp.Accounts.size(); i++) {
+            if ((String.valueOf(AccountListApp.Accounts.get(i).getAccountNumber())).equals(TextFieldAccountNumber1.getText())) {
+                JOptionPane.showMessageDialog(null, "Account Number is already in use.", "INVALID ACCOUNT NUMBER", JOptionPane.WARNING_MESSAGE);
+                return;
 
-            JOptionPane.showMessageDialog(null, infoMessage, "InfoBox: " + titleBar, JOptionPane.INFORMATION_MESSAGE);
-            
+            } else {
+                if (TextFieldAccountNumber1.getText().length() > 8) {
+                    JOptionPane.showMessageDialog(null, "Account Number is Too large Any account number must be 8 Digits ", "INVALID ACCOUNT NUMBER", JOptionPane.WARNING_MESSAGE);
+                } else if (TextFieldAccountNumber1.getText().length() < 8) {
+                    JOptionPane.showMessageDialog(null, "Account Number is Too SMALL Any account number must be 8 Digits ", "INVALID ACCOUNT NUMBER", JOptionPane.WARNING_MESSAGE);
+                } else {
+                    AccountMain newAccount = new AccountMain(Integer.parseInt(TextFieldAccountNumber1.getText()), jTextFieldAccountName.getText(), jTextFieldAccountAdress.getText());
+                    AccountListApp.Accounts.add(newAccount);
+
+                    resetAllTextFields();
+                    String infoMessage = AccountListApp.Accounts.get(AccountListApp.Accounts.size() - 1).printAllAccounts2();
+                    String titleBar = "Account Sucessfully Added";
+
+                    JOptionPane.showMessageDialog(null, infoMessage, "InfoBox: " + titleBar, JOptionPane.INFORMATION_MESSAGE);
+
+                }
+            }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -242,16 +251,12 @@ public class addAccount extends javax.swing.JFrame {
             }
         });
     }
-        public void resetAllTextFields() {
+
+    //resets the text fields so later use
+    public void resetAllTextFields() {
         TextFieldAccountNumber1.setText("Enter Account Number");
         jTextFieldAccountName.setText("Enter Account Holder's Name");
         jTextFieldAccountAdress.setText("Enter Account Holder's Address");
-//        jTextFieldAccountNumber2.setText("Enter Account Number");
-//        TextFieldAccountNumber3.setText("Enter Account Number");
-//        TextFieldAccountNumber4.setText("Enter Account Number");
-//        TextFieldAccountNumber5.setText("Enter Account Number");
-//        jTextFieldTransaction1.setText("Enter New Transaction");
-
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

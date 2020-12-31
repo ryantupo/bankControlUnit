@@ -1,12 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
  *
  * @author ryansPC
+ * Date : 31/12/2020
  */
 import java.lang.StringBuilder;
 import java.util.*;
@@ -19,27 +15,11 @@ public class AccountListApp {
     public static ArrayList<AccountMain> Accounts = new ArrayList<AccountMain>();
 
     public static void main(String[] args) {
-
-        AccountMain blahblah = new AccountMain(21383713, "Ryan Tuplin", "blah blah first lane 8653");
-        AccountMain blahblah2 = new AccountMain(21383714, "Ryan Tuplin", "blah blah first lane 8653");
-        Accounts.add(blahblah);
-        Accounts.add(blahblah2);
-        PrintAllAccounts();
-        closeAccount("21383714");
-        PrintAllAccounts();
-
-        
-        addTransaction("21383713", 52222.99);
-        addTransaction("21383713", 55.99);
-        addTransaction("21383713", 533.99);
-
-        //blahblah.printAllTransactions();
-        addTransaction("21383713", -55.09);
-        System.out.println(printAllTransactions2("21383713"));
-        //System.out.println(printAllWithdraws2("21383713"));
+        //used for debugging
     }
 
     //prints all Accounts
+    //standard version for debugging
     public static void PrintAllAccounts() {
         Accounts.forEach(account -> {
             System.out.println(account.toString());
@@ -48,6 +28,7 @@ public class AccountListApp {
     }
 
     //prints all Accounts
+    //returns all accounts for Gui use
     public static String PrintAllAccounts2() {
         StringBuilder FullAccountList = new StringBuilder("");
 
@@ -68,6 +49,7 @@ public class AccountListApp {
 
     }
 
+    //function to check if an account exsists in Accounts
     public static boolean checkAccount(String accountnumber) {
         for (int i = 0; i < Accounts.size(); i++) {
             if ((String.valueOf(Accounts.get(i).getAccountNumber())).equals(accountnumber)) {
@@ -80,66 +62,17 @@ public class AccountListApp {
         return false;
     }
 
-    //original print all transaction function
-//    //print function for transaction in size order
-//    public static void printAllTransactions(String accountnumber) {
-//        for (int i = 0; i < Accounts.size(); i++) {
-//            if ((String.valueOf(Accounts.get(i).getAccountNumber())).equals(accountnumber)) {
-//
-//                //declare temporary var
-//                AccountMain currentAccount = Accounts.get(i);
-//
-//                //copy list
-//                currentAccount.sortedTransactions = (LinkedList) currentAccount.transactions.clone();
-//
-//                //sort new list 
-//                Collections.sort(currentAccount.sortedTransactions);
-//
-//                //print out each transaction from the new sorted list
-//                currentAccount.sortedTransactions.forEach(_item -> {
-//
-//                    System.out.println(_item);
-//
-//                });
-//            }
-//        }
-//    }
-//    
-//        //print function for windraws in size order
-//    public static void printAllWithdraws(String accountnumber) {
-//        for (int i = 0; i < Accounts.size(); i++) {
-//            if ((String.valueOf(Accounts.get(i).getAccountNumber())).equals(accountnumber)) {
-//
-//                //declare temporary var
-//                AccountMain currentAccount = Accounts.get(i);
-//
-//                //copy list
-//                currentAccount.sortedWithdraws = (LinkedList) currentAccount.withdraws.clone();
-//
-//                //sort new list 
-//                Collections.sort(currentAccount.sortedWithdraws);
-//
-//                //print out each transaction from the new sorted list
-//                currentAccount.sortedWithdraws.forEach(_item -> {
-//                    System.out.println(_item);
-//                });
-//            }
-//
-//        }
-//
-//    }
-    //print function for transaction in size order
+    //return function for transaction in size order
     public static String printAllTransactions2(String accountnumber) {
         for (int i = 0; i < Accounts.size(); i++) {
             if ((String.valueOf(Accounts.get(i).getAccountNumber())).equals(accountnumber)) {
 
                 //declare temporary var
                 AccountMain currentAccount = Accounts.get(i);
-                
-                
+
+                //Collections version
 //                InsertionSortLinkedList blah = (createSortedList(currentAccount.transactions));
 //                blah.printlist(blah.head);
-//                
 //                
 //                //copy list
 //                currentAccount.sortedTransactions = (LinkedList) currentAccount.transactions.clone();
@@ -149,16 +82,14 @@ public class AccountListApp {
 //
 //                //print out each transaction from the new sorted list
 //                return statements(currentAccount.sortedTransactions);
+//                currentAccount.transactions.createSortedList();
 
-                   
-                //currentAccount.transactions.createSortedList();
-
+                //custom sorting alg version
+                
                 InsertionSortLinkedList newListy = currentAccount.transactions.createSortedList();
                 newListy.insertionSort(newListy.head);
-                
-                newListy.printlist(newListy.head);
 
-
+                return newListy.printlist(newListy.head);
 
             }
         }
@@ -166,28 +97,15 @@ public class AccountListApp {
         return null;
     }
 
-    public static String statements(LinkedList<Double> sortedTrans) {
-        int counter = 1;
+    //print function for windraws in size order
+    public static String printAllWithdraws2(String accountnumber) {
+        for (int i = 0; i < Accounts.size(); i++) {
+            if ((String.valueOf(Accounts.get(i).getAccountNumber())).equals(accountnumber)) {
 
-        String statement = "";
+                //declare temporary var
+                AccountMain currentAccount = Accounts.get(i);
 
-        for (Double trans : sortedTrans) {
-            statement += String.valueOf(counter) + ": £";
-            statement += trans + "\n";
-            counter += 1;
-        }
-
-        return statement;
-    }
-
-//    //print function for windraws in size order
-//    public static String printAllWithdraws2(String accountnumber) {
-//        for (int i = 0; i < Accounts.size(); i++) {
-//            if ((String.valueOf(Accounts.get(i).getAccountNumber())).equals(accountnumber)) {
-//
-//                //declare temporary var
-//                AccountMain currentAccount = Accounts.get(i);
-//
+                //Collections sorting version
 //                //copy list
 //                currentAccount.sortedWithdraws = (LinkedList) currentAccount.withdraws.clone();
 //
@@ -196,13 +114,23 @@ public class AccountListApp {
 //
 //                //print out each transaction from the new sorted list
 //                return statements(currentAccount.sortedWithdraws);
-//            }
-//        }
-//
-//        return null;
-//
-//    }
+//                
+//                
+                //custom sorting alg version
+                InsertionSortLinkedList newListyWithdraws = currentAccount.withdraws.createSortedList();
+                newListyWithdraws.insertionSort(newListyWithdraws.head);
 
+                return newListyWithdraws.printlist(newListyWithdraws.head);
+
+            }
+        }
+
+        return null;
+
+    }
+
+    //function to add a transaction to transactions rotating old out and new items
+    //to the end of the 6 length lists
     public static void addTransaction(String accountnumber, double newTransaction) {
         for (int i = 0; i < Accounts.size(); i++) {
             if ((String.valueOf(Accounts.get(i).getAccountNumber())).equals(accountnumber)) {
@@ -210,13 +138,6 @@ public class AccountListApp {
                 //declare temporary var
                 AccountMain currentAccount = Accounts.get(i);
 
-                //LocalDateTime myDateObj = LocalDateTime.now();
-                //DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-                //formattedDate = myDateObj.format(myFormatObj);
-                //StringBuilder str = new StringBuilder();
-                //str.append(newTransaction);
-                //str.append(" ");
-                //str.append(formattedDate);
                 if (newTransaction > 0) {
                     if (currentAccount.transactions.size() >= 6) {
                         //adds new transaction to balance

@@ -9,6 +9,7 @@
  * @author ryansPC
  */
 import javax.swing.*;
+
 public class deleteAccount extends javax.swing.JFrame {
 
     /**
@@ -161,10 +162,11 @@ public class deleteAccount extends javax.swing.JFrame {
             }
         });
     }
-           public void resetAllTextFields() {
+    
+    //resets the text fields so later use
+    public void resetAllTextFields() {
 
         jTextFieldAccountNumber2.setText("Enter Account Number");
-
 
     }
 

@@ -9,6 +9,7 @@
  * @author ryansPC
  */
 import javax.swing.*;
+
 public class withdraws extends javax.swing.JFrame {
 
     /**
@@ -156,10 +157,11 @@ public class withdraws extends javax.swing.JFrame {
             }
         });
     }
-           public void resetAllTextFields() {
+
+    //resets the text fields so later use
+    public void resetAllTextFields() {
 
         TextFieldAccountNumber4.setText("Enter Account Number");
-
 
     }
 

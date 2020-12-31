@@ -1,34 +1,9 @@
 
 public class customLinky {
 
-    public static CustomListLinky crunchifyList;
-
     public static void main(String[] args) {
 
-        // Default constructor - let's put "0" into head element.
-        crunchifyList = new CustomListLinky();
-
-        // add more elements to LinkedList
-        crunchifyList.addLast("1");
-        crunchifyList.addLast("2");
-        crunchifyList.addLast("3");
-        crunchifyList.addLast("4");
-        crunchifyList.addLast("5");
-        System.out.println(crunchifyList);
-        crunchifyList.removeFirst();
-        System.out.println(crunchifyList);
-
-        /*
-		 * Please note that primitive values can not be added into LinkedList directly. They must be converted to their
-		 * corresponding wrapper class.
-         */
-        System.out.println("Print: crunchifyList: \t\t" + crunchifyList);
-        System.out.println(".size(): \t\t\t\t" + crunchifyList.size());
-        System.out.println(".get(3): \t\t\t\t" + crunchifyList.get(3) + " (get element at index:3 - list starts from 0)");
-        System.out.println(".remove(2): \t\t\t\t" + crunchifyList.remove(2) + " (element removed)");
-        System.out.println(".get(3): \t\t\t\t" + crunchifyList.get(3) + " (get element at index:3 - list starts from 0)");
-        System.out.println(".size(): \t\t\t\t" + crunchifyList.size());
-        System.out.println("Print again: crunchifyList: \t" + crunchifyList);
+        //for debugging 
     }
 
 }
@@ -49,6 +24,8 @@ class CustomListLinky {
         // Initialize Node only incase of 1st element
         if (head == null) {
             head = new Node(data);
+            incrementCounter();
+            return;
         }
 
         Node customTempNode = new Node(data);
@@ -70,10 +47,12 @@ class CustomListLinky {
         incrementCounter();
     }
 
+    //returns size of list
     public int getCounter() {
         return counter;
     }
 
+    //control functions for counter/size counter ----
     private void incrementCounter() {
         counter++;
     }
@@ -81,6 +60,7 @@ class CustomListLinky {
     private void decrementCounter() {
         counter--;
     }
+    //-----------------------------------------------
 
     // inserts the specified element at the specified position in this list
     //basically pushes the node at index wanted forward and reassigns the node before's next to our new node
@@ -117,7 +97,7 @@ class CustomListLinky {
         Node customCurrentNode = null;
         if (head != null) {
             customCurrentNode = head.getNext();
-
+            //loops through
             for (int i = 0; i < index; i++) {
                 if (customCurrentNode.getNext() == null) {
                     return null;
@@ -178,10 +158,12 @@ class CustomListLinky {
     }
 
     // returns the number of elements in this list.
+    //using the custom counter varible 
     public int size() {
         return getCounter();
     }
 
+    @Override
     public String toString() {
         String output = "";
 
@@ -237,24 +219,17 @@ class CustomListLinky {
 
     }
 
+    //uses the custom linkedlist sorting class
+    //to sort the custom linked list and return a sorted version
     public InsertionSortLinkedList createSortedList() {
         InsertionSortLinkedList newList = new InsertionSortLinkedList();
 
         Node current = this.head;
-//        while (current != null) {
-//            newList.push((Double) current.getData());
-//            current = current.getNext();
-//            System.out.println("blah");
-//        
-//
-//        }
-        System.out.println("asdasasd");
-        for (int i = 0; i<this.counter;i++){
+        for (int i = 0; i < this.counter; i++) {
             newList.push((Double) current.getData());
             current = current.getNext();
-            System.out.println("blah");
         }
-        
+
         return newList;
     }
 

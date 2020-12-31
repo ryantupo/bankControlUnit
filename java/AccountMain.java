@@ -1,45 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  *
  * @author ryansPC
+ * Date : 31/12/2020
  */
-//Account general details:
-//1. Account number
-//2. Account holder name
-//3. Account holder address
-//4. Opening Date
-//5. Current balance.
-//Transaction details:
-//1. Transaction type (i.e. deposit, withdrawal)
-//2. Transaction amount
-//3. Transaction date.
-//manage accounts
-//hold last 6 transactions with some coollections framework
-// save onto disk ? 
-//1. Create a new account and add it to the system. - done
-//2. Display on the computer screen a list of the existing accounts with the account general details. - done
-//3. Delete a closed account from the system, given the account number. - done
-//4. Update the system with details of any new transaction of existing accounts. Note that for each
-//account only the information of the last six transactions is maintained by the system. - done
-//5. Given an account number, display on the computer screen details of the account's last six
-//transactions being sorted by transaction amounts. Note that all transaction amounts are positive
-//numbers regardless whether a transaction is a deposit or withdrawal. - done 
-//6. Provide an appropriate system user interface that allows testing of the above methods.
-//Account general details:
-//1. Account number
-//2. Account holder name
-//3. Account holder address
-//4. Opening Date
-//5. Current balance.
-//Transaction details:
-//1. Transaction type (i.e. deposit, withdrawal)
-//2. Transaction amount
-//3. Transaction date.
+
 import java.util.*; //imports all util
 import java.time.LocalDateTime; // Import the LocalDateTime class
 import java.time.format.DateTimeFormatter; // Import the DateTimeFormatter class
@@ -52,16 +16,24 @@ public class AccountMain {
     private String OpeningDate;
     public double currentBalance;
     private String formattedDate;
+    
+    
+    //Collections standard version-----------
 
+    //create another list to then sort transactions (they need to be saved in order of placed)    
     //public LinkedList<Double> transactions = new LinkedList<Double>();
     //public LinkedList<Double> withdraws = new LinkedList<Double>();
     
-    public CustomListLinky transactions = new CustomListLinky();
-    public CustomListLinky withdraws = new CustomListLinky();
-
     //create another list to then sort transactions (they need to be saved in order of placed)    
     //LinkedList<Double> sortedTransactions = new LinkedList<Double>();
     //LinkedList<Double> sortedWithdraws = new LinkedList<Double>();
+    
+    
+    
+    //Custom sorting and data structure version--------
+    
+    public CustomListLinky transactions = new CustomListLinky();
+    public CustomListLinky withdraws = new CustomListLinky();
     
     public CustomListLinky sortedTransactions = new CustomListLinky();
     public CustomListLinky sortedWithdraws = new CustomListLinky();
@@ -70,25 +42,24 @@ public class AccountMain {
     
     
     public AccountMain(int accountNumber, String accountHolderName, String accountHolderAddress) {
-
+        
+        //information from user
         AccNumber = accountNumber;
         AccName = accountHolderName;
         AccAddress = accountHolderAddress;
-
+        
+        //create date varible corrosponding to time and day the new AccountMain is made
         LocalDateTime myDateObj = LocalDateTime.now();
         DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         formattedDate = myDateObj.format(myFormatObj);
         OpeningDate = formattedDate;
+        
+        //all accounts start at 0 balance
         currentBalance = 0.00;
 
-    //    //fill list of transaction with "null"
-    //    for (int i = 0; i <= 6; i++) {
-    //        transactions.add(null);
-    //        withdraws.add(null);
-     //   }
-
     }
-
+    
+    //self explanatory return functions-------
     public int getAccountNumber() {
         return AccNumber;
     }
@@ -108,7 +79,9 @@ public class AccountMain {
     public double getAcccountCurrentAccount() {
         return currentBalance;
     }
-
+    //-------------------------------------------
+    
+    //set functions for changing of details --------
     public void setAccountName(String NewName) {
         AccName = NewName;
     }
@@ -116,7 +89,11 @@ public class AccountMain {
     public void setAccountAddress(String NewAdress) {
         AccAddress = NewAdress;
     }
-
+    
+    //-----------------------------------------------
+    
+    
+    //basic print all accounts for debugging
     public void printAllAccounts() {
         System.out.println("--------------------------------------");
         System.out.println("Account Number:" + AccNumber);
@@ -130,7 +107,8 @@ public class AccountMain {
     
     //return print statement for pop ups
     //for when adding the new account for example
-        public String printAllAccounts2() {
+    //for all account use
+    public String printAllAccounts2() {
         return("--------------------------------------\n"
         +"Account Number:" + AccNumber + "\n"
         +"Account Holders Name:" + AccName + "\n"
@@ -140,7 +118,9 @@ public class AccountMain {
         +"--------------------------------------");
 
     }
-
+    
+    //toString for returning full account infortmation
+    //for this singular account
     @Override
     public String toString() {
 

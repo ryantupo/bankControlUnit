@@ -202,7 +202,8 @@ public class addTransaction extends javax.swing.JFrame {
             }
         });
     }
-
+    
+    //resets the text fields so later use
     public void resetAllTextFields() {
 
         TextFieldAccountNumber5.setText("Enter Account Number");
